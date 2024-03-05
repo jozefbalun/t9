@@ -4,7 +4,7 @@ This is frontend for enter t9 input and show generated combinations and matched 
 Project is based on Vue3 and vite.
 
 ## Screenshot
-![localhost_5173_ (1).png](..%2F..%2F..%2FDownloads%2Flocalhost_5173_%20%281%29.png)
+![screenshot.png](./src/assets/screenshot.png)
 
 ## Constraints
 - Work just for one word input (0/space, 1 are not handled)
