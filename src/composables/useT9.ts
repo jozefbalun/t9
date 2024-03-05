@@ -38,6 +38,8 @@ export default function useT9() {
   const keyPress = (value: string) => {
     if (value === 'del') {
       state.value.input = state.value.input.slice(0, -1)
+    } else if (value === 'clear') {
+      state.value.input = ''
     } else {
       state.value.input = state.value.input + value
     }

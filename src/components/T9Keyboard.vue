@@ -1,18 +1,18 @@
 <script setup lang="ts">
-
+import { BackspaceIcon, XCircleIcon } from '@heroicons/vue/16/solid'
 import { Button } from '@/components/ui/button'
+
 
 const emit = defineEmits<{
   keyPress: [key: string]
 }>()
 function handleButtonClick(key: string) {
-  console.log('handleButtonClick', key)
   emit('keyPress', key)
 }
 </script>
 
 <template>
-  <div class="py-10">
+  <div class="py-5">
 
     <div class="mx-auto max-w-xl px-4">
       <div class="bg-white rounded-xl p-4">
@@ -26,9 +26,9 @@ function handleButtonClick(key: string) {
           <Button @click="handleButtonClick('7')">7 <span class="ml-1 text-xs">PQRS</span></Button>
           <Button @click="handleButtonClick('8')">8 <span class="ml-1 text-xs">TUV</span></Button>
           <Button @click="handleButtonClick('9')">9 <span class="ml-1 text-xs">WXYZ</span></Button>
-          <Button @click="handleButtonClick('')"></Button>
+          <Button @click="handleButtonClick('clear')"><span class="ml-1 text-xs flex items-center gap-1"><XCircleIcon class="h-4 w-4" /> CLEAR</span></Button>
           <Button @click="handleButtonClick('0')">0 <span class="ml-1 text-xs">SPACE</span></Button>
-          <Button @click="handleButtonClick('del')"><span class="ml-1 text-xs">DEL</span></Button>
+          <Button @click="handleButtonClick('del')"><span class="ml-1 text-xs flex items-center gap-1"><BackspaceIcon class="h-4 w-4" />DEL</span></Button>
         </div>
       </div>
     </div>
