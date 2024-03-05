@@ -1,31 +1,37 @@
-# t9-frontend
+# T9 Frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+This is frontend for enter t9 input and show generated combinations and matched real words.  
+Project is based on Vue3 and vite.
 
-## Recommended IDE Setup
+## Screenshot
+![localhost_5173_ (1).png](..%2F..%2F..%2FDownloads%2Flocalhost_5173_%20%281%29.png)
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Constraints
+- Work just for one word input (0/space, 1 are not handled)
+- Match only with ~4000K most common English words
+- Word Matching Not working for long words (primitive solution for supabase text search)
+- For input can use only keypad buttons
+- Long input can consume all RAM
 
-## Type Support for `.vue` Imports in TS
+## Improvements
+- Better component hierarchy (keypad, keys)
+- UI for config values
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Future work
+- Word suggestions
+- Next word prediction
+- Fuzziness
 
 ## Project Setup
 
 ```sh
 npm install
 ```
+
+### Env
+required env variables for init supabase client SDK 
+- `VITE_APP_SUPABASE_URL=`
+- `VITE_APP_SUPABASE_ANON_KEY=`
 
 ### Compile and Hot-Reload for Development
 
@@ -39,10 +45,9 @@ npm run dev
 npm run build
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
+### Run preview
 ```sh
-npm run test:unit
+npm run preview
 ```
 
 ### Lint with [ESLint](https://eslint.org/)
