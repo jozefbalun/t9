@@ -1,4 +1,9 @@
-import { ref, computed, watch } from 'vue'
+import { ref, computed } from 'vue'
+import { createClient } from '@supabase/supabase-js'
+import { watchDebounced } from '@vueuse/core'
+
+
+const supabase = createClient(import.meta.env.VITE_APP_SUPABASE_URL, import.meta.env.VITE_APP_SUPABASE_ANON_KEY)
 
 export type T9State = {
   input: string
@@ -13,6 +18,7 @@ const wordlist = [
   'ability',
   'able',
   'about',
+  'hello',
 ];
 
 export default function useT9() {
@@ -47,14 +53,25 @@ export default function useT9() {
 
   const input = computed(() => state.value.input)
 
-  watch(input, (value, oldValue, onCleanup) => {
-    console.log('input changed', value, oldValue)
+  watchDebounced(input, async (value, oldValue) => {
     if (value !== oldValue) {
-      state.value.combinations = getWordFromInput(value)
-      console.log('getWordFromInput', state.value.combinations)
-    }
-  })
+      // local generate combinations
+      // state.value.combinations = getWordFromInput(value)
 
+      try {
+        console.log('input', value)
+        const { data, error } = await supabase.functions.invoke('word-from-input', {
+          body: { input: value },
+        })
+        state.value.words = data.words
+        state.value.combinations = data.combinations
+      } catch (e) {
+        console.error('Function invoke error', e)
+      }
+    }
+  }, { debounce: 500, maxWait: 5000 })
+
+  // Used for local generate combinations
   const getWordFromInput = (input: string) => {
     const combinations: string[] = [];
 
@@ -74,6 +91,7 @@ export default function useT9() {
     return combinations
   }
 
+  // Used for local generate combinations
   const backtrack = (input: string, index: number, currentCombination: string[], combinations: string[]) => {
     if (index === input.length) {
       combinations.push(currentCombination.join(''));
